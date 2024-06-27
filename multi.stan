@@ -2,6 +2,8 @@
 
 
 functions {
+  // Custom distribution function icar_normal_lpdf for an ICAR random
+  // variable phi (see Morris et al., 2019)
   real icar_normal_lpdf(
     vector phi, int J_dept, array[] int node1, array[] int node2
   ) {
@@ -54,7 +56,7 @@ data {
 
 parameters {
   
-  vector[J_dept] phi_raw;
+  vector[J_dept] phi_raw; // Corresponds to the parameter phi of the manuscript
   real<lower=0> sigma_phi;
   
   real<lower=0, upper=1> sens;
@@ -162,7 +164,7 @@ model {
   seroprev_global_via_dept ~ beta(101, 1948);
   seroprev_global_via_dept ~ beta(1147, 17212);
 
-  alpha_dept ~ normal(0, 10);
+  sigma_phi ~ exponential(1);
   beta_age_raw ~ normal(0, 1);
   
   for (k in 1:N_pos_incid) {
@@ -186,6 +188,7 @@ model {
   }
   
 }
+
 
 generated quantities {
   
