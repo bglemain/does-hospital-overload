@@ -1,2 +1,2 @@
-# does-hospital-overload
-Stan code for the article "Does hospital overload increase the risk of death for COVID-19 patients?"
+# does-incidence-increase
+Stan code for the article "Does COVID-19 incidence increase the risk of death when infected?"
